@@ -24,6 +24,7 @@ __all__ = [
 # threshold
 VISIBLE_PART = 1e-3
 MIN_NUM_JOINTS = 5
+# 0.4
 CENTER_TR = 0.4
 
 # net attributes

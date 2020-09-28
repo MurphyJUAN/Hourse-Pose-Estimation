@@ -41,6 +41,7 @@ def draw_limbs(image, pose_2d, visible):
             cv2.circle(image, (x1, y1), JOINT_DRAW_SIZE*_NORMALISATION_FACTOR , _COLORS[lid], -1)
             cv2.line(image, (x0, y0), (x1, y1),
                      _COLORS[lid], LIMB_DRAW_SIZE*_NORMALISATION_FACTOR , 16)
+    
 
 
 def plot_pose(pose):
@@ -51,6 +52,9 @@ def plot_pose(pose):
         [0, 1], [1, 2], [2, 3], [0, 4], [4, 5], [5, 6], [0, 7], [7, 8],
         [8, 9], [9, 10], [8, 11], [11, 12], [12, 13], [8, 14], [14, 15],
         [15, 16]]
+    # _CONNECTION = [
+    #     [0, 1],[1, 2]]
+    
 
     def joint_color(j):
         """
@@ -85,11 +89,32 @@ def plot_pose(pose):
         col = '#%02x%02x%02x' % joint_color(j)
         ax.scatter(pose[0, j], pose[1, j], pose[2, j],
                    c=col, marker='o', edgecolor=col)
+    # for j in range(15):
+    #     col = '#%02x%02x%02x' % joint_color(j)
+    #     ax.scatter(pose[0, j], pose[1, j], pose[2, j],
+    #                c=col, marker='o', edgecolor=col)
+    targetList = [0,1,4,7,11,14]
+    for j in range(17):
+        if j == 0 or j == 1 or j == 4 or j == 7 or j == 11 or j == 14:
+            text = '(' + str(round(pose[0, j], 1)) + "," + str(round(pose[1, j], 1)) + "," + str(round(pose[2, j], 1)) + ')'
+
+            if j == 0:
+                ax.text(pose[0, j], pose[1, j], pose[2, j]-400, text)
+            elif j == 14:
+                ax.text(pose[0, j], pose[1, j], pose[2, j]+400, text)
+            elif j == 1:
+                ax.text(pose[0, j]-400, pose[1, j], pose[2, j], text)
+            else:
+                ax.text(pose[0, j], pose[1, j], pose[2, j], text)
     smallest = pose.min()
     largest = pose.max()
     ax.set_xlim3d(smallest, largest)
     ax.set_ylim3d(smallest, largest)
     ax.set_zlim3d(smallest, largest)
+
+    # xs=min(pose[0])-800
+    # ax.scatter(xs, pose[1],zs = pose[2], zdir="y",c=plt.cm.jet(np.linspace(0,1,17)),depthshade=True)   
+    # ax.set_ylim3d(xs,)
 
     return fig
 
