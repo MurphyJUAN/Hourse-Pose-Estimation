@@ -1,13 +1,15 @@
 # 說明
 ## 環境需求
-
+```
 !pip install tensorflow-gpu 
 !pip install scipy 
 !pip install pyyaml 
 !pip install opencv-python==3.4.5.20
 %tensorflow_version 1.x 
+```
 
 ## 引用函式庫
+```
 from IPython import display
 from PIL import Image
 import numpy as np
@@ -17,6 +19,7 @@ import coco_metric
 from mask_rcnn.object_detection import visualization_utils
 import matplotlib.pyplot as plt
 import cv2
+```
 
 ## 程序簡述
 - horse_imgseg_pose.ipynb
